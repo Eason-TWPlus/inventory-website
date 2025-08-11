@@ -36,3 +36,25 @@
     <script src="script.js"></script>
 </body>
 </html>
+<div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border:1px solid #ccc; z-index:1000;">
+    <h2>編輯器材</h2>
+    <form id="editForm">
+        <label>器材名稱: <input type="text" name="name"></label><br>
+        <label>狀態: <input type="text" name="status"></label><br>
+        <label>型號: <input type="text" name="model"></label><br>
+        <label>資產類型: <input type="text" name="type"></label><br>
+        <label>品牌: <input type="text" name="brand"></label><br>
+        <label>財產編號: <input type="text" name="assetNumber"></label><br>
+        <label>機號: <input type="text" name="machineNumber"></label><br>
+        <label>數量: <input type="number" name="quantity"></label><br>
+        <label>領用日期: <input type="date" name="receiptDate"></label><br>
+        <label>目前擁有者: <input type="text" name="currentOwner"></label><br>
+        <label>狀況備註: <input type="text" name="notes"></label><br>
+        <label>中央時期購入: <input type="text" name="purchasePeriod"></label><br>
+        <label>上一個擁有者: <input type="text" name="previousOwner"></label><br>
+        <label>顏色: <input type="text" name="color"></label><br>
+        <label>裝置相片 (URL): <input type="text" name="photo"></label><br>
+        <button type="submit">保存</button>
+        <button type="button" id="cancelButton">取消</button>
+    </form>
+</div>
