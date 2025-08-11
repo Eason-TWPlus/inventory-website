@@ -31,21 +31,21 @@ function displayData(items) {
     items.forEach((item, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${item.name}</td>
-            <td>${item.status}</td>
-            <td>${item.model}</td>
-            <td>${item.type}</td>
-            <td>${item.brand}</td>
-            <td>${item.assetNumber}</td>
-            <td>${item.machineNumber}</td>
-            <td>${item.quantity}</td>
-            <td>${item.receiptDate}</td>
-            <td>${item.currentOwner}</td>
-            <td>${item.notes}</td>
-            <td>${item.purchasePeriod}</td>
-            <td>${item.previousOwner}</td>
-            <td>${item.color}</td>
-            <td><img src="${item.photo}" alt="相片"></td>
+            <td>${item.器材名稱}</td>
+            <td>${item.狀態}</td>
+            <td>${item.型號}</td>
+            <td>${item.資產類型}</td>
+            <td>${item.品牌}</td>
+            <td>${item.財產編號}</td>
+            <td>${item.機號}</td>
+            <td>${item.數量}</td>
+            <td>${item.領用日期}</td>
+            <td>${item.目前擁有者}</td>
+            <td>${item.狀況備註}</td>
+            <td>${item.中央時期購入}</td>
+            <td>${item.上一個擁有者}</td>
+            <td>${item.顏色}</td>
+            <td><img src="${item.裝置相片}" alt="相片"></td>
             <td>
                 <button onclick="editItem(${index})">編輯</button>
                 <button onclick="deleteItem(${index})">刪除</button>
