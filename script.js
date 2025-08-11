@@ -41,7 +41,7 @@ function displayData(items) {
             <td>${item.數量}</td>
             <td>${item.領用日期}</td>
             <td>${item.目前擁有者}</td>
-            <td>${item.狀況備註}</td>
+            <td>${item.備註}</td>
             <td>${item.中央時期購入}</td>
             <td>${item.上一個擁有者}</td>
             <td>${item.顏色}</td>
