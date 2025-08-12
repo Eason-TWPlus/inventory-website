@@ -1,60 +1,93 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <title>攝影師器材清冊</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>攝影器材清冊</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>攝影師個人器材財產清冊</h1>
-    <button id="addButton">新增器材</button>
-    <input type="text" id="searchInput" placeholder="輸入關鍵字搜索...">
-    <table id="inventoryTable">
-        <thead>
-            <tr>
-                <th>器材名稱</th>
-                <th>狀態</th>
-                <th>型號</th>
-                <th>資產類型</th>
-                <th>品牌</th>
-                <th>財產編號</th>
-                <th>機號</th>
-                <th>數量</th>
-                <th>領用日期</th>
-                <th>目前擁有者</th>
-                <th>備註</th>
-                <th>中央時期購入</th>
-                <th>上一個擁有者</th>
-                <th>顏色</th>
-                <th>裝置相片</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            <!-- 資料會在這裡動態添加 -->
-        </tbody>
-    </table>
-    <script src="script.js"></script>
+  <h1>攝影器材清冊</h1>
+  
+  <!-- 搜尋、篩選、排序介面 -->
+  <div class="controls">
+    <label>搜尋（器材名稱或型號）：</label>
+    <input type="text" id="searchInput" placeholder="輸入關鍵字..." onkeydown="if(event.key === 'Enter') applyFilters();">
+    
+    <label>類型：</label>
+    <select id="filterType">
+      <option value="all">全部</option>
+      <option value="濾鏡/保護鏡">濾鏡/保護鏡</option>
+      <option value="相機包">相機包</option>
+      <option value="相機周邊">相機周邊</option>
+      <option value="腳架">腳架</option>
+      <option value="讀卡機">讀卡機</option>
+      <option value="鏡頭">鏡頭</option>
+      <option value="電池/充電器">電池/充電器</option>
+      <option value="麥克風">麥克風</option>
+    </select>
+    
+    <label>使用者：</label>
+    <select id="filterOwner">
+      <option value="all">全部</option>
+      <option value="Alex Chen_陳煥然">Alex Chen_陳煥然</option>
+      <option value="Andy Hsueh_薛孝安">Andy Hsueh_薛孝安</option>
+      <option value="Devin Tsai_蔡宗儒">Devin Tsai_蔡宗儒</option>
+      <option value="Eason Chen_陳致宇">Eason Chen_陳致宇</option>
+      <option value="Fuhua Hung_洪復華">Fuhua Hung_洪復華</option>
+      <option value="Hank Hsu_許宏超">Hank Hsu_許宏超</option>
+      <option value="Howard Chang_張肇華">Howard Chang_張肇華</option>
+      <option value="John Su_蘇弘杰">John Su_蘇弘杰</option>
+      <option value="Joseph Wu_吳宗哲">Joseph Wu_吳宗哲</option>
+      <option value="Justin Wu_吳偉韶">Justin Wu_吳偉韶</option>
+      <option value="Kama Hsu_許雅勤">Kama Hsu_許雅勤</option>
+      <option value="Klein Wang_王伯軒">Klein Wang_王伯軒</option>
+      <option value="Kris Ma_馬駿杰">Kris Ma_馬駿杰</option>
+      <option value="Leon Lien_連裕閔">Leon Lien_連裕閔</option>
+      <option value="Luffy Li_李文顥">Luffy Li_李文顥</option>
+      <option value="Patrick Chen_陳冠宇">Patrick Chen_陳冠宇</option>
+      <option value="Ryan Wu_吳東祐">Ryan Wu_吳東祐</option>
+      <option value="Scott Huang_黃柏崴">Scott Huang_黃柏崴</option>
+    </select>
+    
+    <label>排序：</label>
+    <select id="sortBy">
+      <option value="器材名稱_asc">器材名稱（升序）</option>
+      <option value="器材名稱_desc">器材名稱（降序）</option>
+      <option value="領用日期_asc">領用日期（舊到新）</option>
+      <option value="領用日期_desc">領用日期（新到舊）</option>
+      <option value="數量_asc">數量（小到大）</option>
+      <option value="數量_desc">數量（大到小）</option>
+      <option value="目前擁有者_asc">目前擁有者（升序）</option>
+      <option value="目前擁有者_desc">目前擁有者（降序）</option>
+    </select>
+    
+    <button onclick="applyFilters()">套用</button>
+  </div>
+  
+  <table id="gearTable">
+    <thead>
+      <tr>
+        <th>器材名稱</th>
+        <th>狀態</th>
+        <th>型號</th>
+        <th>資產類型</th>
+        <th>品牌</th>
+        <th>產編</th>
+        <th>機號</th>
+        <th>數量</th>
+        <th>領用日期</th>
+        <th>目前擁有者</th>
+        <th>狀況備註</th>
+        <th>中央時期購入</th>
+        <th>上一個擁有者</th>
+        <th>顏色</th>
+        <th>裝置相片</th>
+      </tr>
+    </thead>
+    <tbody id="gearTableBody"></tbody>
+  </table>
+  
+  <script src="script.js"></script>
 </body>
 </html>
-<div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border:1px solid #ccc; z-index:1000;">
-    <h2>編輯器材</h2>
-    <form id="editForm">
-        <label>器材名稱: <input type="text" name="name"></label><br>
-        <label>狀態: <input type="text" name="status"></label><br>
-        <label>型號: <input type="text" name="model"></label><br>
-        <label>資產類型: <input type="text" name="type"></label><br>
-        <label>品牌: <input type="text" name="brand"></label><br>
-        <label>財產編號: <input type="text" name="assetNumber"></label><br>
-        <label>機號: <input type="text" name="machineNumber"></label><br>
-        <label>數量: <input type="number" name="quantity"></label><br>
-        <label>領用日期: <input type="date" name="receiptDate"></label><br>
-        <label>目前擁有者: <input type="text" name="currentOwner"></label><br>
-        <label>備註: <input type="text" name="notes"></label><br>
-        <label>中央時期購入: <input type="text" name="purchasePeriod"></label><br>
-        <label>上一個擁有者: <input type="text" name="previousOwner"></label><br>
-        <label>顏色: <input type="text" name="color"></label><br>
-        <label>裝置相片 (URL): <input type="text" name="photo"></label><br>
-        <button type="submit">保存</button>
-        <button type="button" id="cancelButton">取消</button>
-    </form>
-</div>
